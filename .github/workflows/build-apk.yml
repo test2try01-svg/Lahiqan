@@ -25,7 +25,9 @@ jobs:
           java-version: '17'
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npx expo install --fix
 
       - name: Build Android APK
         run: |
