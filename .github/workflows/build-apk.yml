@@ -26,18 +26,11 @@ jobs:
 
       - name: Build Pristine App
         run: |
-          # 1. إنشاء مشروع Expo رسمي ونظيف 100% متوافق مع أحدث إصدار
           npx --yes create-expo-app pristine-app --template blank
-          
-          # 2. نقل ملف الكود الأساسي وإعدادات الاسم الخاصة بك إلى المشروع النظيف
           cp App.js pristine-app/App.js
           cp app.json pristine-app/app.json
-          
-          # 3. الدخول للمشروع وتثبيت مكتبة التخزين بإصدارها المتوافق تماماً
           cd pristine-app
           npx expo install @react-native-async-storage/async-storage
-          
-          # 4. تهيئة منصة أندرويد وبناء ملف الـ APK
           npx expo prebuild --platform android --clean
           cd android
           chmod +x gradlew
@@ -47,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lahiqan-app-release
-          path: pristine-app/android/app/build/outputs/apk/release/app-release-unsigned.apk
+          path: pristine-app/android/app/build/outputs/apk/release/*.apk
