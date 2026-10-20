@@ -25,12 +25,13 @@ jobs:
           java-version: '17'
 
       - name: Install Dependencies
-        run: npm install
-
-      - name: Fix Expo Dependencies
-        run: npx expo install --fix
+        run: |
+          npm install
+          npx expo install --fix
 
       - name: Build Android APK
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
         run: |
           npx expo prebuild --platform android --clean
           cd android
